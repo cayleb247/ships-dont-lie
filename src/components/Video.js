@@ -29,13 +29,13 @@ export default function Video() {
     socket.emit("request color");
   }, []);
 
-//   useEffect(() => {
-//     if (isPaused) {
-//       videoRef.current.play();
-//     } else if (isPaused == false) {
-//       videoRef.current.pause();
-//     }
-//   }, [isPaused]);
+  //   useEffect(() => {
+  //     if (isPaused) {
+  //       videoRef.current.play();
+  //     } else if (isPaused == false) {
+  //       videoRef.current.pause();
+  //     }
+  //   }, [isPaused]);
 
   const videoRef = useRef(null);
 
@@ -48,7 +48,14 @@ export default function Video() {
 
   return (
     <div className={styles.container}>
-      <video ref={videoRef} src="/shipwrecked_video.mp4" autoPlay muted playsInline className="h-full w-full"></video>
+      <video
+        ref={videoRef}
+        src="/shipwrecked_video.mp4"
+        autoPlay
+        muted
+        playsInline
+        className="h-full w-full object-cover"
+      ></video>
       <div
         className={`opacity-50 ${colors["red"]} absolute z-2 h-full w-full top-0`}
       ></div>
