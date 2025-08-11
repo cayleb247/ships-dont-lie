@@ -48,7 +48,7 @@ export default function Video() {
 
   return (
     <div className={styles.container}>
-      <video ref={videoRef} src="/shipwrecked_video.mp4" autoPlay muted playsInline></video>
+      <video ref={videoRef} src="/shipwrecked_video.mp4" autoPlay muted playsInline className="h-full w-full"></video>
       <div
         className={`opacity-50 ${colors["red"]} absolute z-2 h-full w-full top-0`}
       ></div>
