@@ -50,7 +50,7 @@ export default function Video(props) {
     <div className={styles.container}>
       <video
         ref={videoRef}
-        src="/shipwrecked_video.mp4"
+        src="/shipwrecked_video2.mp4"
         autoPlay
         playsInline
         className="h-full w-full object-cover"
