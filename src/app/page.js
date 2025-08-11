@@ -5,6 +5,7 @@ import { socket } from "../socket";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
+import Video from "@/components/Video";
 
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
