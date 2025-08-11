@@ -149,56 +149,57 @@ export default function Play(props) {
   const radius = 120;
   const angleStep = (2 * Math.PI) / items.length;
 
- return (
-  <div className={`${styles.playContainer} relative`}>
-    <Video correctAnswerCount={correctAnswerCount} />
+  return (
+    <div className={`${styles.playContainer} relative`}>
+      <Video correctAnswerCount={correctAnswerCount} />
 
-    {/* Overlay container */}
-    <div className="absolute inset-0 flex flex-col justify-between p-5">
-      <h1 className={`${styles.titleText} text-center text-3xl font-bold`}>
-        Pass Jared!
-      </h1>
+      {/* Overlay container */}
+      <div className="absolute inset-0 flex flex-col justify-between p-5">
+        <h1 className={`${styles.titleText} text-center text-3xl font-bold`}>
+          Pass Jared!
+        </h1>
 
-      {/* Game images row */}
-      <div className={styles.gameContainer}>
-        <div className="flex items-center gap-1 w-full">
-          <Image alt="heidi" src="/heidi.png" width={50} height={50} />
-          {hasPotato && (
-            <Image
-              className="rounded-full"
-              alt="jared"
-              src="/jared.png"
-              width={50}
-              height={50}
-            />
-          )}
-        </div>
-
-        <div className="flex items-center gap-1 w-full justify-end">
-          {!hasPotato && (
-            <Image
-              className="rounded-full"
-              alt="jared"
-              src="/jared.png"
-              width={50}
-              height={50}
-            />
-          )}
-          <Image alt="orpheus" src="/orpheus.png" width={50} height={50} />
-        </div>
-      </div>
-
-      {/* Key press prompt */}
-      <div className={`${styles.inputContainer} flex justify-center`}>
-        {currentKey && (
-          <div className="flex flex-col items-center">
-            <h1 className="mb-2 font-medium text-2xl">Press</h1>
-            <div className="rounded bg-amber-50 border-4 border-amber-400 text-amber-800 px-6 py-3 text-3xl font-bold">
-              {currentKey}
-            </div>
+        {/* Game images row */}
+        <div className={styles.gameContainer}>
+          <div className="flex items-center gap-1 w-full">
+            <Image alt="heidi" src="/heidi.png" width={250} height={250} />
+            {hasPotato && (
+              <Image
+                className="rounded-full"
+                alt="jared"
+                src="/jared.png"
+                width={100}
+                height={100}
+              />
+            )}
           </div>
-        )}
+
+          <div className="flex items-center gap-1 w-full justify-end">
+            {!hasPotato && (
+              <Image
+                className="rounded-full"
+                alt="jared"
+                src="/jared.png"
+                width={100}
+                height={100}
+              />
+            )}
+            <Image alt="orpheus" src="/orpheus.png" width={250} height={250} />
+          </div>
+        </div>
+
+        {/* Key press prompt */}
+        <div className={`${styles.inputContainer} flex justify-center`}>
+          {currentKey && (
+            <div className="flex flex-col items-center">
+              <h1 className="mb-2 font-medium text-2xl">Press</h1>
+              <div className="rounded bg-amber-50 border-4 border-amber-400 text-amber-800 px-6 py-3 text-3xl font-bold">
+                {currentKey}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-)}
+  );
+}
