@@ -1,0 +1,34 @@
+.homeContainer {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.image {
+    z-index: 1;
+}
+
+.homePage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.387);
+    position: absolute;
+    z-index: 2;
+    color: white;
+}
+
+.homeButtons {
+    border-radius: 2rem;
+    color: white;
+    background-color: black;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.homeButtons * {
+    cursor: pointer;
+}

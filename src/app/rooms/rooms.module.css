@@ -1,0 +1,83 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  color: white;
+  position: relative;
+}
+
+.roomPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.387);
+    position: absolute;
+    z-index: 2;
+    color: white;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.roomsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1rem;
+    background-color: #6B6B6B;
+    border-radius: 1rem;
+    width: 30%;
+    height: 40%;
+    gap: 1rem;
+    min-width: 15rem;
+}
+
+.roomsContainer form {
+    width: 100%;
+}
+
+.roomsContainer input {
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+    border-bottom: 0.125rem solid white;
+    padding: 0.5rem 0rem 0.5rem 0rem;
+    color: white;
+    width: 80%;
+}
+
+.roomsContainer input:focus {
+    outline: none;
+}
+
+.roomsContainer input::placeholder {
+    color: rgb(213, 213, 213)
+}
+
+.roomsList {
+    overflow-y: scroll;
+}
+
+.createRoomButton {
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(43, 102, 228, 0.988);
+  color: white;
+}
+
+.createRoomButton:hover {
+  background-color: rgba(71, 119, 223, 0.988)
+}
