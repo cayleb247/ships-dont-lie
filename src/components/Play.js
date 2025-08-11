@@ -149,37 +149,56 @@ export default function Play(props) {
   const radius = 120;
   const angleStep = (2 * Math.PI) / items.length;
 
-  return (
-    <div className={styles.playContainer}>
-      <Video correctAnswerCount={correctAnswerCount}></Video>
+ return (
+  <div className={`${styles.playContainer} relative`}>
+    <Video correctAnswerCount={correctAnswerCount} />
+
+    {/* Overlay container */}
+    <div className="absolute inset-0 flex flex-col justify-between p-5">
+      <h1 className={`${styles.titleText} text-center text-3xl font-bold`}>
+        Pass Jared!
+      </h1>
+
+      {/* Game images row */}
       <div className={styles.gameContainer}>
-        <div className="w-full h-full flex gap-0.5">
-          <Image alt="heidi" src={"/heidi.png"} fill></Image>
+        <div className="flex items-center gap-1 w-full">
+          <Image alt="heidi" src="/heidi.png" width={50} height={50} />
           {hasPotato && (
             <Image
               className="rounded-full"
               alt="jared"
-              src={"/jared.png"}
-              height="40"
-              width="40"
-            ></Image>
+              src="/jared.png"
+              width={50}
+              height={50}
+            />
           )}
         </div>
+
+        <div className="flex items-center gap-1 w-full justify-end">
+          {!hasPotato && (
+            <Image
+              className="rounded-full"
+              alt="jared"
+              src="/jared.png"
+              width={50}
+              height={50}
+            />
+          )}
+          <Image alt="orpheus" src="/orpheus.png" width={50} height={50} />
+        </div>
       </div>
-      <h1 className={styles.titleText}>Pass Jared!</h1>
-      <div className={styles.inputContainer}>
-        {/* <Keycap key={currentKey}></Keycap> */}
+
+      {/* Key press prompt */}
+      <div className={`${styles.inputContainer} flex justify-center`}>
         {currentKey && (
-          <div className="flex flex-col content-center justify-center">
-            <h1 className="text-black mb-1 font-[500] text-center text-2xl">
-              Press
-            </h1>
-            <div className="rounded-sm bg-amber-50 border-amber-400 text-amber-800 p-4 border-[0.25rem] box-border flex content-center justify-center">
+          <div className="flex flex-col items-center">
+            <h1 className="mb-2 font-medium text-2xl">Press</h1>
+            <div className="rounded bg-amber-50 border-4 border-amber-400 text-amber-800 px-6 py-3 text-3xl font-bold">
               {currentKey}
             </div>
           </div>
         )}
       </div>
     </div>
-  );
-}
+  </div>
+)}
