@@ -45,6 +45,8 @@ export default function Play(props) {
   const [answerStatus, setAnswerStatus] = useState(null);
   const [gameRole, setGameRole] = useState(null);
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
+  const [playerReady, setPlayerReady] = useState(false);
+  const [playersReady, setPlayersReady] = useState(false);
   //   const playersReady = true;
 
   function randomLetter() {
@@ -55,6 +57,24 @@ export default function Play(props) {
     console.log("current letter", letter);
     console.log(currentKey);
   }
+
+  useEffect(() => {
+    console.log("player ready");
+
+    const handleReady = (result) => {
+      if (result) {
+        setPlayersReady(true);
+      }
+    };
+    socket.on("receive ready", handleReady);
+    if (playerReady) {
+      socket.emit("check ready", socket.id, props.roomName);
+    }
+
+    return () => {
+      socket.off("receive ready", handleReady);
+    };
+  }, [playerReady]);
 
   useEffect(() => {
     socket.on("receive potato status", (userID) => {
@@ -146,59 +166,72 @@ export default function Play(props) {
   //     }
   //   }, [playersReady]);
 
-  const radius = 120;
-  const angleStep = (2 * Math.PI) / items.length;
+  return (
+    <div className={`${styles.playContainer} relative`}>
+      <Video correctAnswerCount={correctAnswerCount} />
+      {playersReady && (
+        <div className="absolute inset-0 flex flex-col justify-between p-5">
+          <h1 className={`${styles.titleText} text-center text-3xl font-bold`}>
+            Pass Jared!
+          </h1>
 
- return (
-  <div className={`${styles.playContainer} relative`}>
-    <Video correctAnswerCount={correctAnswerCount} />
+          {/* Game images row */}
+          <div className={styles.gameContainer}>
+            <div className="flex items-center gap-1 w-full">
+              <Image alt="heidi" src="/heidi.png" width={50} height={50} />
+              {hasPotato && (
+                <Image
+                  className="rounded-full"
+                  alt="jared"
+                  src="/jared.png"
+                  width={50}
+                  height={50}
+                />
+              )}
+            </div>
 
-    {/* Overlay container */}
-    <div className="absolute inset-0 flex flex-col justify-between p-5">
-      <h1 className={`${styles.titleText} text-center text-3xl font-bold`}>
-        Pass Jared!
-      </h1>
-
-      {/* Game images row */}
-      <div className={styles.gameContainer}>
-        <div className="flex items-center gap-1 w-full">
-          <Image alt="heidi" src="/heidi.png" width={50} height={50} />
-          {hasPotato && (
-            <Image
-              className="rounded-full"
-              alt="jared"
-              src="/jared.png"
-              width={50}
-              height={50}
-            />
-          )}
-        </div>
-
-        <div className="flex items-center gap-1 w-full justify-end">
-          {!hasPotato && (
-            <Image
-              className="rounded-full"
-              alt="jared"
-              src="/jared.png"
-              width={50}
-              height={50}
-            />
-          )}
-          <Image alt="orpheus" src="/orpheus.png" width={50} height={50} />
-        </div>
-      </div>
-
-      {/* Key press prompt */}
-      <div className={`${styles.inputContainer} flex justify-center`}>
-        {currentKey && (
-          <div className="flex flex-col items-center">
-            <h1 className="mb-2 font-medium text-2xl">Press</h1>
-            <div className="rounded bg-amber-50 border-4 border-amber-400 text-amber-800 px-6 py-3 text-3xl font-bold">
-              {currentKey}
+            <div className="flex items-center gap-1 w-full justify-end">
+              {!hasPotato && (
+                <Image
+                  className="rounded-full"
+                  alt="jared"
+                  src="/jared.png"
+                  width={50}
+                  height={50}
+                />
+              )}
+              <Image alt="orpheus" src="/orpheus.png" width={50} height={50} />
             </div>
           </div>
-        )}
-      </div>
+
+          {/* Key press prompt */}
+          <div className={`${styles.inputContainer} flex justify-center`}>
+            {currentKey && (
+              <div className="flex flex-col items-center">
+                <h1 className="mb-2 font-medium text-2xl">Press</h1>
+                <div className="rounded bg-amber-50 border-4 border-amber-400 text-amber-800 px-6 py-3 text-3xl font-bold">
+                  {currentKey}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      {!playersReady && (
+        <div className="absolute flex flex-col items-center justify-center z-4 w-full h-full gap-1.5">
+          <h1 className="text-white">You Ready?</h1>
+          <div className="cursor-pointer box-border pl-3 pr-3 pt-1.5 pb-1.5 bg-black rounded-full text-white">
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setPlayerReady(true);
+              }}
+            >
+              Ready!
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-)}
+  );
+}

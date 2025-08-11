@@ -166,15 +166,15 @@ app.prepare().then(() => {
       }
     });
 
-    socket.on("player ready", (roomName) => {
-      const room = roomsMeta.get(roomName);
+    // socket.on("player ready", (roomName) => {
+    //   const room = roomsMeta.get(roomName);
 
-      room.ready.push(socket.id);
+    //   room.ready.push(socket.id);
 
-      if (room.ready.length == 2) {
-        socket.to(roomName).emit("both players ready");
-      }
-    });
+    //   if (room.ready.length == 2) {
+    //     socket.to(roomName).emit("both players ready");
+    //   }
+    // });
 
     socket.on("send current cards", (cardList, roomName) => {
       socket.to(roomName).emit("receive current cards", cardList);
@@ -217,6 +217,16 @@ app.prepare().then(() => {
 
     socket.on("correct answer", (roomName) => {
       socket.to(roomName).emit("correct answer")
+    })
+
+    socket.on("check ready", (socketID, roomName) => {
+      console.log("check ready called");
+      const roomMeta = roomsMeta.get(roomName);
+      roomMeta.ready.push(socketID);
+
+      console.log("length:", roomMeta.ready.length);
+
+      io.to(roomName).emit("receive ready", roomMeta.ready.length >= 2);
     })
 
     socket.on("disconnect", () => {
