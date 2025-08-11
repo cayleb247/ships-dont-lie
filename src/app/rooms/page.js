@@ -23,7 +23,6 @@ export default function Rooms() {
       <Image alt="zach latta" src="/zach_latta.png" fill />
       <div className={styles.roomPage}>
         <h1 className={styles.title}>Find a Room</h1>
-
         <div className={styles.roomsContainer}>
           <input
             type="text"
