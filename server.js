@@ -215,6 +215,10 @@ app.prepare().then(() => {
       }
     });
 
+    socket.on("correct answer", (roomName) => {
+      socket.to(roomName).emit("correct answer")
+    })
+
     socket.on("disconnect", () => {
       console.log("disconnect");
     })

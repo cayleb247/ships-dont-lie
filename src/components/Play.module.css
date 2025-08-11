@@ -3,6 +3,10 @@
   width: 100vw;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .gameContainer {
@@ -11,6 +15,12 @@
   left: 50%;
   transform: translate(-50%, 50%);
   z-index: 3;
+}
+
+.inputContainer {
+  position: absolute;
+  margin-bottom: 2rem;
+  z-index: 4;
 }
 .playContainer form {
   grid-row: 3 / 4;

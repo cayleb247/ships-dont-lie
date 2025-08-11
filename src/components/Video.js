@@ -18,16 +18,16 @@ const colors = {
   teal: "bg-[teal]",
 };
 
-export default function Video() {
+export default function Video(props) {
   const [isPaused, togglePaused] = useState(true);
-  const [currentColor, setCurrentColor] = useState("red");
+  const [currentColor, setCurrentColor] = useState(null);
 
   useEffect(() => {
-    socket.on("receive color", (color) => {
-      setCurrentColor(colors[color]);
-    });
-    socket.emit("request color");
-  }, []);
+    const keys = Object.keys(colors);
+    const randomIndex = Math.floor(Math.random() * keys.length);
+    const randomKey = keys[randomIndex];
+    setCurrentColor(randomKey);
+  }, [props.correctAnswerCount]);
 
   //   useEffect(() => {
   //     if (isPaused) {
@@ -57,7 +57,7 @@ export default function Video() {
         className="h-full w-full object-cover"
       ></video>
       <div
-        className={`opacity-50 ${colors["red"]} absolute z-2 h-full w-full top-0`}
+        className={`opacity-50 ${colors[currentColor]} absolute z-2 h-full w-full top-0`}
       ></div>
     </div>
   );
