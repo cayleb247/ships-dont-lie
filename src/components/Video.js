@@ -52,7 +52,6 @@ export default function Video(props) {
         ref={videoRef}
         src="/shipwrecked_video.mp4"
         autoPlay
-        muted
         playsInline
         className="h-full w-full object-cover"
         loop
