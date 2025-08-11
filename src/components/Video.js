@@ -55,6 +55,7 @@ export default function Video(props) {
         muted
         playsInline
         className="h-full w-full object-cover"
+        loop
       ></video>
       <div
         className={`opacity-50 ${colors[currentColor]} absolute z-2 h-full w-full top-0`}

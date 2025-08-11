@@ -5,7 +5,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
 }
 
@@ -15,11 +14,26 @@
   left: 50%;
   transform: translate(-50%, 50%);
   z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.titleText {
+  position: absolute;
+  top: 2rem;
+  z-index: 4;
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .inputContainer {
   position: absolute;
-  margin-bottom: 2rem;
+  bottom: 3rem;
   z-index: 4;
 }
 .playContainer form {

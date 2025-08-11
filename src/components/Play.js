@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { socket } from "@/socket";
 import Video from "@/components/Video";
 import Image from "next/image";
-import Keycap from "./Keycap";
 
 const items = ["you", "enemy", "penis"];
 const alphabet = [
@@ -127,7 +126,7 @@ export default function Play(props) {
       if (event.key == currentKey) {
         console.log("correct answer!");
         setAnswerStatus("correct");
-        setCorrectAnswerCount(count => count + 1);
+        setCorrectAnswerCount((count) => count + 1);
       } else {
         setAnswerStatus("incorrect");
       }
@@ -154,54 +153,32 @@ export default function Play(props) {
     <div className={styles.playContainer}>
       <Video correctAnswerCount={correctAnswerCount}></Video>
       <div className={styles.gameContainer}>
-        {items.map((item, i) => {
-          const angle = i * angleStep;
-          const x = radius * Math.cos(angle);
-          const y = radius * Math.sin(angle);
-          return (
-            <div
-              key={i}
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: `translate(${x}px, ${y}px)`,
-                gap: "0.5rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-              }}
-            >
-              <div
-                style={{
-                  padding: "1rem",
-                  aspectRatio: "1",
-                  background: "blue",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <p>{item}</p>
-              </div>
-              {hasPotato && (
-                <Image
-                  className="rounded-full"
-                  alt="jared"
-                  src={"/jared.png"}
-                  height="40"
-                  width="40"
-                ></Image>
-              )}
-            </div>
-          );
-        })}
+        <div className="w-full h-full flex gap-0.5">
+          <Image alt="heidi" src={"/heidi.png"} fill></Image>
+          {hasPotato && (
+            <Image
+              className="rounded-full"
+              alt="jared"
+              src={"/jared.png"}
+              height="40"
+              width="40"
+            ></Image>
+          )}
+        </div>
       </div>
+      <h1 className={styles.titleText}>Pass Jared!</h1>
       <div className={styles.inputContainer}>
         {/* <Keycap key={currentKey}></Keycap> */}
-        {currentKey && <div className="rounded-sm bg-amber-50 border-amber-400 text-amber-800 p-4 border-[0.25rem] box-border flex content-center justify-center">{currentKey}</div>}
+        {currentKey && (
+          <div className="flex flex-col content-center justify-center">
+            <h1 className="text-black mb-1 font-[500] text-center text-2xl">
+              Press
+            </h1>
+            <div className="rounded-sm bg-amber-50 border-amber-400 text-amber-800 p-4 border-[0.25rem] box-border flex content-center justify-center">
+              {currentKey}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
